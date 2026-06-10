@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TIMESって？ | TIMES</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@700;900&family=Nunito:wght@800;900&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --og:    #F47B20;
+  --ogd:   #C45C08;
+  --ogs:   #FFF0E0;
+  --ogm:   #FDDDB8;
+  --ink:   #1A1208;
+  --muted: #5A4535;
+  --cream: #FFFBF5;
+  --white: #FFFFFF;
+  --bd:    rgba(244,123,32,.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.75;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+img { display: block; max-width: 100%; }
+a   { text-decoration: none; }
+ul  { list-style: none; }
+
+/* ===== NAV ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  height: 72px;
+  background: rgba(255,251,245,.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--bd);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; gap: 16px;
+}
+.nav-logo {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900; font-size: 26px; color: var(--ink); flex-shrink: 0;
+}
+.nav-logo em { font-style: normal; color: var(--og); }
+.nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: nowrap; }
+.nav-links a {
+  font-size: 13px; font-weight: 700; color: var(--ink);
+  padding: 7px 14px; border-radius: 20px;
+  border: 2px solid rgba(244,123,32,.35); white-space: nowrap;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.nav-links a:hover,
+.nav-links a.active { background: var(--og); color: #fff; border-color: var(--og); }
+
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px; padding: 4px; flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block; width: 24px; height: 2.5px;
+  background: var(--ink); border-radius: 2px; transition: .25s ease;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+.mobile-menu {
+  position: fixed; top: 72px; left: 0; right: 0; z-index: 490;
+  background: var(--cream); border-bottom: 2px solid var(--bd);
+  transform: translateY(-110%); opacity: 0;
+  transition: .3s ease; pointer-events: none;
+}
+.mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.mobile-menu a {
+  display: block; padding: 18px 28px;
+  font-size: 16px; font-weight: 700; color: var(--ink);
+  border-bottom: 1px solid var(--bd);
+  transition: color .2s, background .2s;
+}
+.mobile-menu a:hover { color: #fff; background: var(--og); }
+.mobile-menu a.active { color: var(--og); }
+
+/* ===== PAGE HERO ===== */
+.page-hero {
+  margin-top: 72px;
+  background: linear-gradient(135deg, #1A1208 0%, #3D1A08 55%, #C45C08 100%);
+  padding: 72px 32px 56px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: 'TIMES';
+  position: absolute; font-family: 'Nunito', sans-serif;
+  font-weight: 900; font-size: clamp(100px, 22vw, 220px);
+  color: rgba(244,123,32,.07);
+  left: 50%; top: 50%; transform: translate(-50%, -50%);
+  white-space: nowrap; pointer-events: none; user-select: none;
+}
+.page-hero-label {
+  font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 800;
+  letter-spacing: 4px; text-transform: uppercase; color: var(--og); margin-bottom: 12px;
+}
+.page-hero h1 {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: clamp(32px, 7vw, 68px); font-weight: 900; color: #fff;
+  line-height: 1.25; margin-bottom: 16px;
+  -webkit-text-stroke: 1px rgba(244,123,32,.35);
+}
+.page-hero p {
+  font-size: clamp(15px, 2vw, 19px); color: rgba(255,255,255,.85);
+  max-width: 600px; margin: 0 auto; line-height: 1.75;
+  word-break: auto-phrase; overflow-wrap: break-word;
+}
+
+/* ===== LAYOUT ===== */
+.container { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+section { padding: 88px 0; }
+.section-label {
+  font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 800;
+  letter-spacing: 4px; text-transform: uppercase; color: var(--og); margin-bottom: 10px;
+}
+.section-title {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: clamp(24px, 4vw, 40px); font-weight: 900; color: var(--ink);
+  line-height: 1.35; margin-bottom: 28px;
+  word-break: keep-all; overflow-wrap: break-word;
+}
+
+/* ===== REVEAL ===== */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.on { opacity: 1; transform: translateY(0); }
+
+/* ===== SEC1 ===== */
+.sec-about { background: var(--white); }
+.about-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 64px; align-items: center; }
+.about-img { overflow: hidden; width: 100%; }
+.about-img img { width: 100%; height: auto; object-fit: cover; display: block; }
+.about-text p { font-size: clamp(16px, 1.8vw, 18px); color: var(--muted); line-height: 1.75; margin-bottom: 20px; word-break: auto-phrase; overflow-wrap: break-word; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-text strong { color: var(--og); font-weight: 700; background: rgba(244,123,32,.1); padding: 2px 5px; border-radius: 4px; }
+
+/* ===== SEC2 ===== */
+.sec-vision { background: var(--ogs); }
+.vision-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 64px; align-items: center; }
+.vision-box { background: var(--white); border-radius: 24px; padding: 44px; border: 2px solid var(--ogm); position: relative; box-shadow: 0 4px 32px rgba(244,123,32,.08); }
+.vision-box::before { content: '"'; font-family: 'Nunito', sans-serif; font-size: 140px; font-weight: 900; color: var(--ogm); position: absolute; top: -28px; left: 24px; line-height: 1; pointer-events: none; user-select: none; }
+.vision-keywords { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
+.kw { background: var(--og); color: #fff; padding: 7px 18px; border-radius: 20px; font-size: 14px; font-weight: 700; box-shadow: 0 2px 10px rgba(244,123,32,.3); }
+.vision-box p { font-size: clamp(16px, 1.8vw, 18px); color: var(--ink); line-height: 1.75; position: relative; z-index: 1; word-break: auto-phrase; overflow-wrap: break-word; }
+.vision-img { overflow: hidden; width: 100%; }
+.vision-img img { width: 100%; height: auto; object-fit: cover; display: block; }
+
+/* ===== SEC3 ===== */
+.sec-profile { background: var(--white); }
+.profile-card { display: grid; grid-template-columns: 240px 1fr; gap: 56px; align-items: start; background: var(--cream); border-radius: 28px; padding: 48px; border: 2px solid var(--bd); box-shadow: 0 4px 32px rgba(244,123,32,.06); }
+.profile-photo { width: 210px; height: 210px; overflow: hidden; flex-shrink: 0; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,.12); }
+.profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+.profile-name { font-family: 'Zen Maru Gothic', sans-serif; font-size: clamp(24px, 3vw, 32px); font-weight: 900; color: var(--ink); margin-bottom: 6px; }
+.profile-role { font-size: 16px; color: var(--og); font-weight: 700; margin-bottom: 24px; }
+.profile-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+.profile-item { display: flex; gap: 14px; align-items: flex-start; }
+.profile-item .pi-label { background: var(--og); color: #fff; padding: 4px 12px; border-radius: 10px; font-size: 13px; font-weight: 700; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+.profile-item span, .profile-item ul { font-size: clamp(15px, 1.6vw, 17px); color: var(--muted); line-height: 1.75; }
+.profile-item ul { display: flex; flex-direction: column; gap: 6px; }
+.profile-msg { background: linear-gradient(135deg, var(--og), var(--ogd)); color: #fff; border-radius: 16px; padding: 20px 24px; font-size: clamp(15px, 1.6vw, 17px); font-weight: 700; line-height: 1.75; box-shadow: 0 4px 20px rgba(244,123,32,.35); word-break: auto-phrase; overflow-wrap: break-word; }
+
+/* ===== SEC4 ===== */
+.sec-logo { background: var(--cream); }
+.logo-grid { display: grid; grid-template-columns: 280px 1fr; gap: 64px; align-items: center; }
+.logo-img { width: 260px; height: 260px; display: flex; align-items: center; justify-content: center; overflow: hidden; filter: drop-shadow(0 4px 24px rgba(244,123,32,.2)); }
+.logo-img img { width: 100%; height: 100%; object-fit: contain; }
+.logo-divider { width: 48px; height: 4px; background: var(--og); border-radius: 2px; margin-bottom: 20px; }
+.logo-section-label { color: var(--og); margin-bottom: 10px; font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; }
+.logo-section-title { font-family: 'Zen Maru Gothic', sans-serif; font-size: clamp(24px, 4vw, 40px); font-weight: 900; color: var(--ink); line-height: 1.35; margin-bottom: 28px; }
+.logo-philosophy { font-family: 'Zen Maru Gothic', sans-serif; font-size: clamp(17px, 2.5vw, 24px); font-weight: 700; color: var(--ink); line-height: 1.75; word-break: auto-phrase; overflow-wrap: break-word; }
+.logo-philosophy span { color: var(--og); border-bottom: 2px solid rgba(244,123,32,.4); }
+
+/* ===== SEC5 ===== */
+.sec-quals { background: var(--ogs); }
+.quals-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.qual-card { background: var(--white); border-radius: 18px; overflow: hidden; border: 2px solid var(--bd); transition: box-shadow .25s, transform .25s, border-color .25s; }
+.qual-card:hover { box-shadow: 0 10px 32px rgba(244,123,32,.18); transform: translateY(-6px); border-color: var(--og); }
+.qual-img { width: 100%; aspect-ratio: 4/3; overflow: hidden; background: var(--ogm); }
+.qual-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
+.qual-card:hover .qual-img img { transform: scale(1.07); }
+.qual-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 40px; background: linear-gradient(135deg, var(--ogm), #ffe8c4); }
+.qual-name { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.75; padding: 14px 14px 18px; text-align: center; }
+
+/* ===== FOOTER ===== */
+footer { background: #0F0B05; padding: 40px 24px; text-align: center; border-top: 3px solid var(--og); }
+.footer-logo { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 28px; color: #fff; margin-bottom: 8px; }
+.footer-logo em { font-style: normal; color: var(--og); }
+.footer-copy { font-size: 13px; color: rgba(255,255,255,.35); margin-top: 8px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .nav { height: 60px; padding: 0 20px; }
+  .nav-logo { font-size: 22px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .mobile-menu { top: 60px; }
+  .page-hero { margin-top: 60px; padding: 60px 24px 48px; }
+  .container { padding: 0 28px; }
+  section { padding: 64px 0; }
+  .about-grid { grid-template-columns: 1fr; gap: 36px; }
+  .vision-grid { grid-template-columns: 1fr; gap: 36px; }
+  .vision-img { order: -1; }
+  .profile-card { grid-template-columns: 1fr; gap: 28px; padding: 36px 28px; }
+  .profile-photo { margin: 0 auto; }
+  .profile-name { text-align: center; }
+  .profile-role { text-align: center; }
+  .logo-grid { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+  .logo-img { margin: 0 auto; }
+  .logo-divider { margin: 0 auto 20px; }
+  .quals-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+
+@media (max-width: 600px) {
+  .nav { height: 54px; padding: 0 16px; }
+  .nav-logo { font-size: 20px; }
+  .mobile-menu { top: 54px; }
+  .mobile-menu a { padding: 16px 20px; font-size: 15px; }
+  .page-hero { margin-top: 54px; padding: 52px 24px 44px; }
+  .page-hero h1 { font-size: clamp(28px, 8vw, 44px); }
+  .page-hero p { font-size: 16px; }
+  .container { padding: 0 22px; }
+  section { padding: 52px 0; }
+  .section-label { font-size: 10px; letter-spacing: 3px; }
+  .section-title { font-size: 22px; margin-bottom: 20px; }
+  .about-grid { gap: 28px; }
+  .vision-grid { gap: 28px; }
+  .about-text p { font-size: 16px; }
+  .vision-box { padding: 28px 20px; }
+  .vision-box::before { font-size: 90px; top: -18px; left: 16px; }
+  .vision-box p { font-size: 16px; }
+  .kw { font-size: 13px; padding: 5px 14px; }
+  .profile-card { padding: 28px 20px; gap: 24px; border-radius: 20px; }
+  .profile-photo { width: 150px; height: 150px; border-radius: 12px; }
+  .profile-name { font-size: 22px; }
+  .profile-role { font-size: 14px; }
+  .profile-item span, .profile-item ul { font-size: 15px; }
+  .profile-msg { font-size: 15px; padding: 16px 18px; }
+  .logo-img { width: 160px; height: 160px; }
+  .logo-section-title { font-size: 22px; }
+  .logo-divider { margin: 0 auto 18px; }
+  .logo-philosophy { font-size: 16px; }
+  .quals-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .qual-name { font-size: 12px; padding: 10px 10px 14px; }
+}
+
+@media (max-width: 375px) {
+  .container { padding: 0 16px; }
+  .section-title { font-size: 20px; }
+  .about-text p { font-size: 15px; }
+  .vision-box p { font-size: 15px; }
+  .profile-photo { width: 130px; height: 130px; }
+  .profile-name { font-size: 20px; }
+  .profile-msg { font-size: 14px; }
+  .logo-img { width: 140px; height: 140px; }
+  .logo-section-title { font-size: 20px; }
+  .logo-philosophy { font-size: 15px; }
+  .quals-grid { gap: 10px; }
+  .qual-name { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <a href="index.html" class="nav-logo">T<em>I</em>MES</a>
+  <ul class="nav-links">
+    <li><a href="about.html" class="active">TIMESって？</a></li>
+    <li><a href="event.html">イベント</a></li>
+    <li><a href="variante.html">バリエンテ今治</a></li>
+    <li><a href="welfare.html">福祉事業所・保育園関係者へ</a></li>
+    <li><a href="volunteer.html">海外ボランティア</a></li>
+    <li><a href="staff.html">スタッフ体験</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="about.html" class="active">TIMESって？</a></li>
+    <li><a href="event.html">イベント</a></li>
+    <li><a href="variante.html">バリエンテ今治</a></li>
+    <li><a href="welfare.html">福祉事業所・保育園関係者へ</a></li>
+    <li><a href="volunteer.html">海外ボランティア</a></li>
+    <li><a href="staff.html">スタッフ体験</a></li>
+  </ul>
+</div>
+
+<div class="page-hero">
+  <p class="page-hero-label">About TIMES</p>
+  <h1>TIMESって？</h1>
+  <p>特性のある児童を対象に、パラスポーツや木の玩具を使ったコミュニティ作りや社会参加を促す活動をしています。</p>
+</div>
+
+<section class="sec-about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img reveal"><img src="images/about1.jpg" alt="活動写真"></div>
+      <div class="reveal">
+        <p class="section-label">About</p>
+        <h2 class="section-title">TIMESって？</h2>
+        <div class="about-text">
+          <p>TIMESは<strong>特性のある児童</strong>を対象に、パラスポーツや木の玩具を使ったコミュニティ作りや社会参加を促す活動をしています。</p>
+          <p>ASD・ADHDなど発達特性のあるお子さんが、安心して「やってみたい」を見つけられる場所です。勝ち負けではなく<strong>「参加すること」「楽しむこと」</strong>を大切にしています。</p>
+          <p>専門的な知識を持つスタッフが<strong>一人ひとりのペース</strong>に合わせてサポートします。初めて参加するご家族も安心してお越しください。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-vision">
+  <div class="container">
+    <div class="vision-grid">
+      <div class="reveal">
+        <p class="section-label">Vision</p>
+        <h2 class="section-title">「大きな一歩」「楽しむ」「成功体験」</h2>
+        <div class="vision-box">
+          <div class="vision-keywords">
+            <span class="kw">大きな一歩</span>
+            <span class="kw">楽しむ</span>
+            <span class="kw">成功体験</span>
+          </div>
+          <p>子どもたちの「やりたい」という大きな一歩を叶える場。そして全力で楽しむことが、成功につながることが<strong>自信と自立</strong>に連がると考えています。</p>
+        </div>
+      </div>
+      <div class="vision-img reveal"><img src="images/about2.jpg" alt="理念写真"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-profile">
+  <div class="container">
+    <p class="section-label reveal">Profile</p>
+    <h2 class="section-title reveal">代表プロフィール</h2>
+    <div class="profile-card reveal">
+      <div><div class="profile-photo"><img src="images/profile.jpg" alt="神野修"></div></div>
+      <div>
+        <p class="profile-name">神野 怜</p>
+        <p class="profile-role">TIMES 代表</p>
+        <div class="profile-list">
+          <div class="profile-item">
+            <span class="pi-label">経歴</span>
+            <span>放課後デイサービスで理学療法士として勤務</span>
+          </div>
+          <div class="profile-item">
+            <span class="pi-label">活動</span>
+            <ul>
+              <li>TIMESでのイベント開催</li>
+              <li>バリエンテ今治の運営</li>
+              <li>海外ボランティア実績あり</li>
+            </ul>
+          </div>
+        </div>
+        <div class="profile-msg">ここびしか出来ない体験で一緒に作っていきましょう！！</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-logo">
+  <div class="container">
+    <div class="logo-grid">
+      <div class="logo-img reveal"><img src="images/logo-times.png" alt="TIMESロゴ"></div>
+      <div class="reveal">
+        <p class="logo-section-label">Philosophy</p>
+        <h2 class="logo-section-title">TIMESに込めた思い</h2>
+        <div class="logo-divider"></div>
+        <p class="logo-philosophy">
+          <span>個性</span>が行き渡り、自由に羽ばたく。<br>
+          そしてそれぞれが<span>助け合い</span>、<br>
+          大きな一歩を踏み出すという<span>思い</span>を込めた
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-quals">
+  <div class="container">
+    <p class="section-label reveal">Qualifications</p>
+    <h2 class="section-title reveal">〜 資格一覧 〜</h2>
+    <div class="quals-grid">
+
+      <div class="qual-card reveal">
+        <div class="qual-img">
+          <img src="images/PT.jpeg" alt="理学療法士"
+               onerror="this.parentElement.innerHTML='<div class=\'qual-img-placeholder\'>🏥</div>'">
+        </div>
+        <p class="qual-name">理学療法士</p>
+      </div>
+
+      <div class="qual-card reveal">
+        <div class="qual-img">
+          <img src="images/パラスポーツ.jpg" alt="パラスポーツ指導員"
+               onerror="this.parentElement.innerHTML='<div class=\'qual-img-placeholder\'>🏅</div>'">
+        </div>
+        <p class="qual-name">パラスポーツ<br>指導員</p>
+      </div>
+
+      <div class="qual-card reveal">
+        <div class="qual-img">
+          <img src="images/感覚統合.webp" alt="感覚統合基礎応用修了"
+               onerror="this.parentElement.innerHTML='<div class=\'qual-img-placeholder\'>🧠</div>'">
+        </div>
+        <p class="qual-name">感覚統合<br>基礎応用修了</p>
+      </div>
+
+      <div class="qual-card reveal">
+        <div class="qual-img">
+          <img src="images/rizumu.jpeg" alt="リズムトレーニングDF"
+               onerror="this.parentElement.innerHTML='<div class=\'qual-img-placeholder\'>🎵</div>'">
+        </div>
+        <p class="qual-name">リズム<br>トレーニングDF</p>
+      </div>
+
+      <div class="qual-card reveal">
+        <div class="qual-img">
+          <img src="images/ビジョントレーニング.jpg" alt="ビジョントレーニングインストラクター"
+               onerror="this.parentElement.innerHTML='<div class=\'qual-img-placeholder\'>👁️</div>'">
+        </div>
+        <p class="qual-name">ビジョントレーニング<br>インストラクター</p>
+      </div>
+
+      <div class="qual-card reveal">
+        <div class="qual-img">
+          <img src="images/シェル.jpg" alt="シェルボーンムーブメント認定上級実践者"
+               onerror="this.parentElement.innerHTML='<div class=\'qual-img-placeholder\'>🦴</div>'">
+        </div>
+        <p class="qual-name">シェルボーン<br>ムーブメント<br>認定上級実践者</p>
+      </div>
+
+      <div class="qual-card reveal">
+        <div class="qual-img">
+          <img src="images/木のおもちゃ.jpeg" alt="おもちゃインストラクター"
+               onerror="this.parentElement.innerHTML='<div class=\'qual-img-placeholder\'>🧸</div>'">
+        </div>
+        <p class="qual-name">おもちゃ<br>インストラクター</p>
+      </div>
+
+      <div class="qual-card reveal">
+        <div class="qual-img">
+          <img src="images/soccer.png" alt="JFA公認D級ライセンス"
+               onerror="this.parentElement.innerHTML='<div class=\'qual-img-placeholder\'>⚽</div>'">
+        </div>
+        <p class="qual-name">JFA公認<br>D級ライセンス</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">T<em>I</em>MES</div>
+  <p class="footer-copy">&copy; 2025 TIMES All rights reserved.</p>
+</footer>
+
+<script>
+const hbg = document.getElementById('hamburger');
+const mob = document.getElementById('mobileMenu');
+hbg.addEventListener('click', () => { hbg.classList.toggle('open'); mob.classList.toggle('open'); });
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const siblings = Array.from(e.target.parentElement.querySelectorAll('.reveal'));
+    const i = siblings.indexOf(e.target);
+    e.target.style.transitionDelay = (i * 100) + 'ms';
+    e.target.classList.add('on');
+    obs.unobserve(e.target);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

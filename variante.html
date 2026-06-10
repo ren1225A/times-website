@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>バリエンテ今治 | TIMES</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@700;900&family=Nunito:wght@800;900&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --og:    #F47B20;
+  --ogd:   #C45C08;
+  --ogs:   #FFF0E0;
+  --ogm:   #FDDDB8;
+  --ink:   #1A1208;
+  --muted: #5A4535;
+  --cream: #FFFBF5;
+  --white: #FFFFFF;
+  --bd:    rgba(244,123,32,.15);
+  --gold:  #C9A84C;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.75;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+img { display: block; max-width: 100%; }
+a   { text-decoration: none; }
+ul  { list-style: none; }
+
+/* ===== NAV ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  height: 72px;
+  background: rgba(255,251,245,.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--bd);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; gap: 16px;
+}
+.nav-logo {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900; font-size: 26px; color: var(--ink); flex-shrink: 0;
+}
+.nav-logo em { font-style: normal; color: var(--og); }
+.nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: nowrap; }
+.nav-links a {
+  font-size: 13px; font-weight: 700; color: var(--ink);
+  padding: 7px 14px; border-radius: 20px;
+  border: 2px solid rgba(244,123,32,.35); white-space: nowrap;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.nav-links a:hover,
+.nav-links a.active { background: var(--og); color: #fff; border-color: var(--og); }
+
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px; padding: 4px; flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block; width: 24px; height: 2.5px;
+  background: var(--ink); border-radius: 2px; transition: .25s ease;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+.mobile-menu {
+  position: fixed; top: 72px; left: 0; right: 0; z-index: 490;
+  background: var(--cream); border-bottom: 2px solid var(--bd);
+  transform: translateY(-110%); opacity: 0;
+  transition: .3s ease; pointer-events: none;
+}
+.mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.mobile-menu a {
+  display: block; padding: 18px 28px;
+  font-size: 16px; font-weight: 700; color: var(--ink);
+  border-bottom: 1px solid var(--bd);
+  transition: color .2s, background .2s;
+}
+.mobile-menu a:hover { color: #fff; background: var(--og); }
+.mobile-menu a.active { color: var(--og); }
+
+/* ===== PAGE HERO ===== */
+.page-hero {
+  margin-top: 72px;
+  background: linear-gradient(135deg, #1A0808 0%, #4A0E0E 50%, #8B1A1A 100%);
+  padding: 72px 32px 56px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: 'VALIENTE';
+  position: absolute; font-family: 'Nunito', sans-serif;
+  font-weight: 900; font-size: clamp(80px, 18vw, 200px);
+  color: rgba(201,168,76,.07);
+  left: 50%; top: 50%; transform: translate(-50%, -50%);
+  white-space: nowrap; pointer-events: none; user-select: none;
+}
+.hero-logo {
+  width: clamp(100px, 18vw, 160px);
+  height: auto; margin: 0 auto 24px;
+  filter: drop-shadow(0 4px 20px rgba(201,168,76,.4));
+  mix-blend-mode: screen;
+}
+.page-hero-label {
+  font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 800;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 12px;
+}
+.page-hero h1 {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: clamp(32px, 7vw, 68px); font-weight: 900; color: #fff;
+  line-height: 1.25; margin-bottom: 16px;
+  -webkit-text-stroke: 1px rgba(201,168,76,.4);
+}
+.page-hero p {
+  font-size: clamp(15px, 2vw, 19px); color: rgba(255,255,255,.85);
+  max-width: 600px; margin: 0 auto; line-height: 1.75;
+  word-break: auto-phrase; overflow-wrap: break-word;
+}
+
+/* ===== LAYOUT ===== */
+.container { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
+section { padding: 88px 0; }
+.section-label {
+  font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 800;
+  letter-spacing: 4px; text-transform: uppercase; color: var(--og); margin-bottom: 10px;
+}
+.section-title {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: clamp(26px, 4vw, 42px); font-weight: 900; color: var(--ink);
+  line-height: 1.35; margin-bottom: 32px;
+  word-break: keep-all; overflow-wrap: break-word;
+}
+
+/* ===== REVEAL ===== */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.on { opacity: 1; transform: translateY(0); }
+
+/* ===== SEC1：自由なサッカーチーム ===== */
+.sec-intro { background: var(--white); }
+.intro-grid {
+  display: grid; grid-template-columns: 1.3fr 1fr;
+  gap: 64px; align-items: center;
+}
+.intro-lead {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: clamp(24px, 3.5vw, 38px); font-weight: 900;
+  color: var(--ink); line-height: 1.35; margin-bottom: 24px;
+}
+.intro-points { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+.intro-point {
+  display: flex; align-items: flex-start; gap: 14px;
+  font-size: clamp(16px, 1.8vw, 18px); color: var(--muted); line-height: 1.75;
+}
+.point-dot {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--og); flex-shrink: 0; margin-top: 7px;
+}
+.intro-arrow { font-size: 36px; color: var(--og); text-align: center; margin: 16px 0; }
+.intro-body {
+  font-size: clamp(16px, 1.8vw, 18px); color: var(--muted);
+  line-height: 1.75; word-break: auto-phrase; overflow-wrap: break-word;
+}
+.intro-img { display: flex; align-items: center; justify-content: center; padding: 20px; }
+.intro-img img {
+  width: 100%; max-width: 320px; height: auto;
+  filter: drop-shadow(0 8px 32px rgba(139,26,26,.3));
+  mix-blend-mode: multiply;
+}
+
+/* ===== SEC2：特徴3カード ===== */
+.sec-features { background: var(--ogs); }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.feature-card {
+  background: var(--white); border-radius: 24px; overflow: hidden;
+  border: 2px solid var(--bd);
+  transition: box-shadow .25s, transform .25s, border-color .25s;
+}
+.feature-card:hover {
+  box-shadow: 0 10px 32px rgba(244,123,32,.18);
+  transform: translateY(-6px); border-color: var(--og);
+}
+.feature-icon-wrap {
+  width: 100%; aspect-ratio: 4/3;
+  background: linear-gradient(135deg, var(--ogm), #ffe8c4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 56px;
+}
+.feature-body { padding: 28px; }
+.feature-title {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: clamp(17px, 2vw, 22px); font-weight: 900;
+  color: var(--ink); margin-bottom: 12px; line-height: 1.3;
+}
+.feature-desc {
+  font-size: clamp(15px, 1.5vw, 17px); color: var(--muted);
+  line-height: 1.75; word-break: auto-phrase; overflow-wrap: break-word;
+}
+
+/* ===== SEC3：詳細 ===== */
+.sec-detail { background: var(--white); }
+.detail-grid { display: flex; flex-direction: column; gap: 48px; }
+.detail-row {
+  display: grid; grid-template-columns: 160px 1fr;
+  gap: 28px; align-items: start;
+  padding-bottom: 48px; border-bottom: 2px solid var(--bd);
+}
+.detail-row:last-child { border-bottom: none; padding-bottom: 0; }
+.detail-label {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: clamp(17px, 2vw, 22px); font-weight: 900;
+  color: var(--og); line-height: 1.5;
+}
+.detail-content {
+  font-size: clamp(16px, 1.8vw, 18px); color: var(--muted);
+  line-height: 1.75; word-break: auto-phrase; overflow-wrap: break-word;
+}
+.detail-content strong { color: var(--ink); font-weight: 700; }
+
+.schedule-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px; }
+.schedule-box {
+  background: var(--cream); border-radius: 16px;
+  padding: 24px; border: 2px solid var(--bd);
+}
+.schedule-day {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: clamp(16px, 2vw, 20px); font-weight: 900;
+  color: var(--og); margin-bottom: 12px;
+}
+.schedule-info {
+  font-size: clamp(15px, 1.8vw, 17px); color: var(--muted); line-height: 1.75;
+}
+.schedule-note {
+  font-size: clamp(13px, 1.4vw, 15px); color: var(--og);
+  background: rgba(244,123,32,.08); border-radius: 8px;
+  padding: 12px 16px; border-left: 3px solid var(--og);
+  margin-bottom: 24px;
+}
+
+.map-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 4px; }
+.map-box { border-radius: 16px; overflow: hidden; border: 2px solid var(--bd); }
+.map-label {
+  background: var(--og); color: #fff;
+  padding: 10px 16px; font-size: 15px; font-weight: 700; text-align: center;
+}
+.map-box iframe { width: 100%; height: 240px; border: none; display: block; }
+
+.items-list { display: flex; flex-direction: column; gap: 12px; }
+.items-list li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: clamp(16px, 1.8vw, 18px); color: var(--muted); line-height: 1.75;
+}
+.items-list li::before { content: '⚽'; font-size: 16px; margin-top: 2px; flex-shrink: 0; }
+
+/* ===== SEC4：申し込み・問い合わせ ===== */
+.sec-contact { background: var(--cream); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.contact-card {
+  background: var(--white); border-radius: 24px; padding: 44px;
+  border: 2px solid var(--bd);
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 20px;
+  transition: box-shadow .25s, border-color .25s;
+  box-shadow: 0 4px 24px rgba(244,123,32,.06);
+}
+.contact-card:hover {
+  box-shadow: 0 10px 40px rgba(244,123,32,.15); border-color: var(--og);
+}
+.contact-title {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-size: clamp(20px, 2.5vw, 28px); font-weight: 900; color: var(--ink);
+}
+.contact-sub {
+  font-size: clamp(15px, 1.6vw, 17px); color: var(--muted); line-height: 1.75;
+}
+.qr-wrap {
+  width: 200px; height: 200px;
+  background: #fff; border-radius: 16px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  padding: 8px; border: 2px solid var(--bd);
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+}
+.qr-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.contact-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--og); color: #fff;
+  padding: 16px 36px; border-radius: 50px;
+  font-size: clamp(15px, 1.8vw, 18px); font-weight: 700;
+  box-shadow: 0 4px 20px rgba(244,123,32,.4);
+  transition: background .2s, transform .15s; white-space: nowrap;
+}
+.contact-btn:hover { background: var(--ogd); transform: translateY(-2px); }
+
+/* ===== FOOTER ===== */
+footer { background: #0F0B05; padding: 40px 24px; text-align: center; border-top: 3px solid var(--og); }
+.footer-logo { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 28px; color: #fff; margin-bottom: 8px; }
+.footer-logo em { font-style: normal; color: var(--og); }
+.footer-copy { font-size: 13px; color: rgba(255,255,255,.35); margin-top: 8px; }
+
+/* ================================================
+   タブレット（〜900px）
+   ================================================ */
+@media (max-width: 900px) {
+  .nav { height: 60px; padding: 0 20px; }
+  .nav-logo { font-size: 22px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .mobile-menu { top: 60px; }
+  .page-hero { margin-top: 60px; padding: 60px 24px 48px; }
+  .container { padding: 0 28px; }
+  section { padding: 64px 0; }
+  .intro-grid { grid-template-columns: 1fr; gap: 40px; }
+  .intro-img { order: -1; }
+  .features-grid { grid-template-columns: 1fr; gap: 20px; }
+  .detail-row { grid-template-columns: 130px 1fr; gap: 20px; }
+  .schedule-grid { grid-template-columns: 1fr; gap: 16px; }
+  .map-grid { grid-template-columns: 1fr; gap: 16px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* ================================================
+   スマホ（〜600px）
+   ================================================ */
+@media (max-width: 600px) {
+  .nav { height: 54px; padding: 0 16px; }
+  .nav-logo { font-size: 20px; }
+  .mobile-menu { top: 54px; }
+  .mobile-menu a { padding: 16px 20px; font-size: 15px; }
+  .page-hero { margin-top: 54px; padding: 52px 20px 40px; }
+  .page-hero h1 { font-size: clamp(28px, 8vw, 44px); }
+  .page-hero p { font-size: 16px; }
+  .hero-logo { width: clamp(80px, 24vw, 120px); margin-bottom: 16px; }
+  .container { padding: 0 20px; }
+  section { padding: 52px 0; }
+  .section-title { font-size: 24px; margin-bottom: 24px; }
+  .intro-lead { font-size: 22px; }
+  .intro-point { font-size: 16px; }
+  .intro-body { font-size: 16px; }
+  .intro-img img { max-width: 220px; }
+  .features-grid { gap: 16px; }
+  .feature-body { padding: 20px; }
+  .feature-title { font-size: 18px; }
+  .feature-desc { font-size: 15px; }
+  .detail-row { grid-template-columns: 1fr; gap: 14px; }
+  .detail-label { font-size: 18px; }
+  .detail-content { font-size: 16px; }
+  .schedule-box { padding: 18px; }
+  .schedule-day { font-size: 16px; }
+  .schedule-info { font-size: 15px; }
+  .map-box iframe { height: 200px; }
+  .map-label { font-size: 14px; }
+  .items-list li { font-size: 16px; }
+  .contact-card { padding: 28px 20px; }
+  .contact-title { font-size: 22px; }
+  .contact-sub { font-size: 15px; }
+  .qr-wrap { width: 170px; height: 170px; }
+  .contact-btn { font-size: 16px; padding: 14px 30px; }
+}
+
+/* ================================================
+   スマホ小（〜375px）
+   ================================================ */
+@media (max-width: 375px) {
+  .container { padding: 0 16px; }
+  .section-title { font-size: 22px; }
+  .intro-lead { font-size: 20px; }
+  .qr-wrap { width: 150px; height: 150px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <a href="index.html" class="nav-logo">T<em>I</em>MES</a>
+  <ul class="nav-links">
+    <li><a href="about.html">TIMESって？</a></li>
+    <li><a href="event.html">イベント</a></li>
+    <li><a href="variante.html" class="active">バリエンテ今治</a></li>
+    <li><a href="welfare.html">福祉事業所・保育園関係者へ</a></li>
+    <li><a href="volunteer.html">海外ボランティア</a></li>
+    <li><a href="staff.html">スタッフ体験</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="about.html">TIMESって？</a></li>
+    <li><a href="event.html">イベント</a></li>
+    <li><a href="variante.html" class="active">バリエンテ今治</a></li>
+    <li><a href="welfare.html">福祉事業所・保育園関係者へ</a></li>
+    <li><a href="volunteer.html">海外ボランティア</a></li>
+    <li><a href="staff.html">スタッフ体験</a></li>
+  </ul>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <img src="images/logo-variante.png" alt="バリエンテ今治" class="hero-logo">
+  <p class="page-hero-label">Valiente Imabari</p>
+  <h1>バリエンテ今治</h1>
+  <p>子どもたちのやりたいを叶える、自由なサッカーチーム</p>
+</div>
+
+<!-- SEC1：自由なサッカーチーム -->
+<section class="sec-intro">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="reveal">
+        <p class="section-label">About</p>
+        <h2 class="intro-lead">自由なサッカーチーム</h2>
+        <div class="intro-points">
+          <div class="intro-point">
+            <span class="point-dot"></span>
+            <span>運動が苦手。でもサッカーがしたい</span>
+          </div>
+          <div class="intro-point">
+            <span class="point-dot"></span>
+            <span>特性があって集団が苦手。</span>
+          </div>
+        </div>
+        <div class="intro-arrow">⬇</div>
+        <p class="intro-body">バリエンテは子どもたちの「やりたい！」を叶える場所です。だからこそ大人の独壇場になることなく、一緒に楽しむことが大事です。</p>
+      </div>
+      <div class="intro-img reveal">
+        <img src="images/logo-variante.png" alt="バリエンテ今治ロゴ">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEC2：特徴3カード -->
+<section class="sec-features">
+  <div class="container">
+    <p class="section-label reveal">Features</p>
+    <h2 class="section-title reveal">〜 特徴 〜</h2>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon-wrap"><img src="images/S__115023876_0.jpg" alt="考えを押しつけない" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="feature-body">
+          <h3 class="feature-title">考えを押しつけない</h3>
+          <p class="feature-desc">監督＝「神様」ではない。子どもたちと一緒に成長していく。</p>
+        </div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon-wrap"><img src="images/S__115023875_0.jpg" alt="技術＋努力の仕方" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="feature-body">
+          <h3 class="feature-title">技術＋努力の仕方</h3>
+          <p class="feature-desc">サッカーの技術はもちろん、その中でそれぞれに合った努力の仕方を学んでいきます。</p>
+        </div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon-wrap"><img src="images/S__115023877_0.jpg" alt="人間力の向上" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="feature-body">
+          <h3 class="feature-title">人間力の向上</h3>
+          <p class="feature-desc">生きていく上で、人との関わりはつきものです。コミュニケーションづくりを一緒に取り組んでいきます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEC3：詳細 -->
+<section class="sec-detail">
+  <div class="container">
+    <p class="section-label reveal">Detail</p>
+    <h2 class="section-title reveal">〜 詳細 〜</h2>
+    <div class="detail-grid">
+
+      <!-- 場所・時間 -->
+      <div class="detail-row reveal">
+        <div class="detail-label">🏟️<br>場所・時間</div>
+        <div class="detail-content">
+          <div class="schedule-grid">
+            <div class="schedule-box">
+              <p class="schedule-day">平日（火・木）</p>
+              <p class="schedule-info">
+                📍 立花中学校<br>
+                🕗 19:30〜21:00
+              </p>
+            </div>
+            <div class="schedule-box">
+              <p class="schedule-day">日曜</p>
+              <p class="schedule-info">
+                📍 大西衣黒グラウンド（午前か午後）<br>
+                🕘 9:00〜11:00<br>
+                🕐 13:00〜15:00
+              </p>
+            </div>
+          </div>
+          <p class="schedule-note">※ 日程・時間・場所の変更もあります</p>
+          <div class="map-grid">
+            <div class="map-box">
+              <div class="map-label">📍 立花中学校</div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.5!2d132.9944828!3d34.0497093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35503af2764a38cf%3A0xa448c4d45578efcf!2z5Lim5rWm5biC56uL56uL6Iqx5Lit5a2m5qCh!5e0!3m2!1sja!2sjp!4v1700000001"
+                allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+            <div class="map-box">
+              <div class="map-label">📍 大西衣黒グラウンド</div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.5!2d132.9206269!3d34.0580549!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35503d7032f98471%3A0xe8621d05e9b70b86!2z6KW_6buS44Kw44Op44Km44Oz44OJ!5e0!3m2!1sja!2sjp!4v1700000002"
+                allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 月謝 -->
+      <div class="detail-row reveal">
+        <div class="detail-label">💰<br>月謝</div>
+        <div class="detail-content">
+          <p><strong>月3,000円</strong>（保険代込み）</p>
+          <p style="margin-top:10px;">週1利用の場合：<strong>1,500円</strong></p>
+        </div>
+      </div>
+
+      <!-- 準備物 -->
+      <div class="detail-row reveal">
+        <div class="detail-label">🎒<br>準備物</div>
+        <div class="detail-content">
+          <ul class="items-list">
+            <li>服装は自由</li>
+            <li>ボール 1球（4号球）</li>
+            <li>スパイク（出来れば持った方が良）</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SEC4：申し込み・問い合わせ -->
+<section class="sec-contact">
+  <div class="container">
+    <p class="section-label reveal">Contact</p>
+    <h2 class="section-title reveal">申し込み・お問い合わせ</h2>
+    <div class="contact-grid">
+
+      <!-- 申し込み：ボタンなし -->
+      <div class="contact-card reveal">
+        <h3 class="contact-title">⚽ 申し込み</h3>
+        <p class="contact-sub">QRコードを読み取って<br>申し込みフォームへ</p>
+        <div class="qr-wrap">
+          <img src="images/qr-form.png" alt="申し込みQRコード">
+        </div>
+      </div>
+
+      <!-- 問い合わせ：LINEボタンあり -->
+      <div class="contact-card reveal">
+        <h3 class="contact-title">💬 お問い合わせ</h3>
+        <p class="contact-sub">LINEからお気軽に<br>ご質問・ご相談ください</p>
+        <div class="qr-wrap">
+          <img src="images/qr-line.jpg" alt="LINE QRコード">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">T<em>I</em>MES</div>
+  <p class="footer-copy">&copy; 2025 TIMES All rights reserved.</p>
+</footer>
+
+<script>
+const hbg = document.getElementById('hamburger');
+const mob = document.getElementById('mobileMenu');
+hbg.addEventListener('click', () => {
+  hbg.classList.toggle('open');
+  mob.classList.toggle('open');
+});
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const siblings = Array.from(e.target.parentElement.querySelectorAll('.reveal'));
+    const i = siblings.indexOf(e.target);
+    e.target.style.transitionDelay = (i * 100) + 'ms';
+    e.target.classList.add('on');
+    obs.unobserve(e.target);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

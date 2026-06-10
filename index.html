@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TIMES</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Zen+Maru+Gothic:wght@700;900&family=Nunito:wght@800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+ 
+<!-- イントロ -->
+<div id="intro-overlay">
+  <div class="intro-screen" id="intro-1">
+    <p class="intro-sub">発達が気になる</p>
+    <p class="intro-main">お子さん・保護者の方へ</p>
+  </div>
+  <div class="intro-screen" id="intro-2">
+    <p class="intro-sub">今治にあります</p>
+    <p class="intro-main">成長の場所</p>
+  </div>
+</div>
+ 
+<!-- メイン -->
+<div id="main-site">
+ 
+  <!-- ナビ -->
+  <nav class="nav" id="mainNav">
+    <a href="index.html" class="nav-logo">T<em>I</em>MES</a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="goSlide(0);return false;" data-slide="0">TIMESって？</a></li>
+      <li><a href="#" onclick="goSlide(1);return false;" data-slide="1">イベント</a></li>
+      <li><a href="#" onclick="goSlide(2);return false;" data-slide="2">バリエンテ今治</a></li>
+      <li><a href="#" onclick="goSlide(3);return false;" data-slide="3">福祉事業所・保育園関係者へ</a></li>
+      <li><a href="#" onclick="goSlide(4);return false;" data-slide="4">海外ボランティア</a></li>
+      <li><a href="#" onclick="goSlide(5);return false;" data-slide="5">スタッフ体験</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+ 
+  <!-- モバイルメニュー -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#" onclick="goSlide(0);closeMobile();return false;">TIMESって？</a></li>
+      <li><a href="#" onclick="goSlide(1);closeMobile();return false;">イベント</a></li>
+      <li><a href="#" onclick="goSlide(2);closeMobile();return false;">バリエンテ今治</a></li>
+      <li><a href="#" onclick="goSlide(3);closeMobile();return false;">福祉事業所・保育園関係者へ</a></li>
+      <li><a href="#" onclick="goSlide(4);closeMobile();return false;">海外ボランティア</a></li>
+      <li><a href="#" onclick="goSlide(5);closeMobile();return false;">スタッフ体験</a></li>
+    </ul>
+  </div>
+ 
+  <!-- ヒーロー -->
+  <section class="hero" id="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster="images/hero-poster.jpg">
+      <source src="images/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+ 
+    <!-- スライド1：TIMES -->
+    <div class="slide slide-1 active" id="slide1">
+      <h1 class="s1-logo">TIMES</h1>
+      <p class="s1-catch">小さな「やりたい」の芽を<br>一生ものの「自信」に育てる場所</p>
+      <a href="about.html" class="btn-orange">ここをタップ</a>
+    </div>
+ 
+    <!-- スライド2：イベント -->
+    <div class="slide slide-2" id="slide2">
+      <div class="s2-center">
+        <p class="s2-event-title">イベント</p>
+        <p class="s2-event-sub">怒られない・比べられない</p>
+        <p class="s2-event-main">月に１度の遊び場</p>
+        <a href="event.html" class="btn-event">ここをタップ <span>›</span></a>
+      </div>
+    </div>
+ 
+    <!-- スライド3：バリエンテ今治 -->
+    <div class="slide slide-3" id="slide3">
+      <div class="s3-center">
+        <p class="s3-title">バリエンテ今治</p>
+        <p class="s3-concept">ここはやりたいを叶える遊び場だ。</p>
+        <a href="variante.html" class="btn-event">ここをタップ <span>›</span></a>
+      </div>
+    </div>
+ 
+    <!-- スライド4：福祉事業所・保育園関係者へ -->
+    <div class="slide slide-4" id="slide4">
+      <div class="s4-center">
+        <p class="s4-title">福祉事業所・保育園関係者の方々へ</p>
+        <p class="s4-sub">放課後デイサービスや保育園にて運動面や感覚面に関する指導や研修を行います。</p>
+        <a href="welfare.html" class="btn-event">ここをタップ <span>›</span></a>
+      </div>
+    </div>
+ 
+    <!-- スライド5：海外ボランティア実績 -->
+    <div class="slide slide-5" id="slide5">
+      <div class="s5-center">
+        <p class="s5-title">海外ボランティア実績</p>
+        <p class="s5-sub">東南アジア最大のスラムへ</p>
+        <a href="volunteer.html" class="btn-event">ここをタップ <span>›</span></a>
+      </div>
+    </div>
+ 
+    <!-- スライド6：スタッフ体験 -->
+    <div class="slide slide-6" id="slide6">
+      <div class="s6-center">
+        <p class="s6-title">スタッフ体験</p>
+        <p class="s6-sub">あなたも一緒に活動しませんか？</p>
+        <a href="staff.html" class="btn-event">ここをタップ <span>›</span></a>
+      </div>
+    </div>
+ 
+    <!-- 矢印 -->
+    <button class="arrow arrow-l" id="arrowL">&#8249;</button>
+    <button class="arrow arrow-r" id="arrowR">&#8250;</button>
+ 
+    <!-- ドット -->
+    <div class="dots">
+      <span class="dot on"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </section>
+ 
+</div>
+ 
+<script src="js/main.js"></script>
+</body>
+</html>
